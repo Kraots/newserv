@@ -7,13 +7,13 @@ from disnake.ext import commands
 import utils
 from utils import Context, BDSM
 
-from main import Astemia
+from main import Vystalia
 
 
 class _BDSM(commands.Cog, name='BDSM'):
     """BDSM related commands."""
 
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
 
     @property
@@ -56,7 +56,7 @@ class _BDSM(commands.Cog, name='BDSM'):
     async def bdsm_set(self, ctx: Context):
         """Set or update your bdsm results.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
@@ -149,11 +149,11 @@ class _BDSM(commands.Cog, name='BDSM'):
 
     @commands.Cog.listener()
     async def on_member_remove(self, member: disnake.Member):
-        if member.guild.id != 1097610034701144144:
+        if member.guild.id != 1102654728350998542:
             return
 
         await self.bot.db.delete('bdsm', {'_id': member.id})
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(_BDSM(bot))

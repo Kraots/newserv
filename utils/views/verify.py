@@ -12,7 +12,7 @@ from disnake.ui import View, button
 import utils
 
 if TYPE_CHECKING:
-    from main import Astemia
+    from main import Vystalia
 
 __all__ = (
     'create_intro',
@@ -20,7 +20,7 @@ __all__ = (
 )
 
 
-async def create_intro(webhook: disnake.Webhook, ctx: utils.Context, bot: Astemia, user_id: int = None):
+async def create_intro(webhook: disnake.Webhook, ctx: utils.Context, bot: Vystalia, user_id: int = None):
     user_id = user_id or ctx.author.id
 
     if not isinstance(ctx.channel, disnake.DMChannel):
@@ -60,7 +60,7 @@ async def create_intro(webhook: disnake.Webhook, ctx: utils.Context, bot: Astemi
             bot.verifying.pop(bot.verifying.index(user_id))
             raise utils.Canceled
         return m.channel.id == ctx.channel.id and m.author.id == user_id
-    guild = bot.get_guild(1097610034701144144)
+    guild = bot.get_guild(1102654728350998542)
     intro_channel = guild.get_channel(utils.Channels.intros)
 
     try:
@@ -338,14 +338,14 @@ async def create_intro(webhook: disnake.Webhook, ctx: utils.Context, bot: Astemi
 
 
 class Verify(View):
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         super().__init__(timeout=None)
         self.bot = bot
 
     async def on_error(self, error, item, inter):
         await self.bot.inter_reraise(inter, item, error)
 
-    @button(label='Verify', style=disnake.ButtonStyle.green, custom_id='astemia:verify')
+    @button(label='Verify', style=disnake.ButtonStyle.green, custom_id='vystalia:verify')
     async def verify(self, button: disnake.Button, inter: disnake.MessageInteraction):
         await inter.response.defer()
         disagree = '<:disagree:938412196663271514>'

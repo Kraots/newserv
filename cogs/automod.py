@@ -6,11 +6,11 @@ from disnake.ext import commands
 import utils
 from utils import StaffRoles, ExtraRoles
 
-from main import Astemia
+from main import Vystalia
 
 
 class AutoMod(commands.Cog):
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
 
         # (messages, seconds, user/member/channel)
@@ -62,7 +62,7 @@ class AutoMod(commands.Cog):
 
         action = 'muted'
         _action = 'mute'
-        role = ctx.astemia.get_role(ExtraRoles.muted)  # Mute
+        role = ctx.vystalia.get_role(ExtraRoles.muted)  # Mute
         _data = await utils.UserFriendlyTime(commands.clean_content).convert(ctx, f'{time} {reason.title()}')
         duration = utils.human_timedelta(_data.dt, suffix=False)
         data: utils.Mutes = await self.bot.db.get('tags', user.id)
@@ -93,7 +93,7 @@ class AutoMod(commands.Cog):
             _action = 'block'
             data.muted = False
             data.blocked = True
-            role = ctx.astemia.get_role(ExtraRoles.blocked)
+            role = ctx.vystalia.get_role(ExtraRoles.blocked)
 
         if data.streak == 7:
             data.permanent = True
@@ -123,7 +123,7 @@ class AutoMod(commands.Cog):
                              f'**{_action.title()} Duration:** `{_duration}`\n' \
                              f'**Expire Date:** {expire_date}\n' \
                              f'**Remaining:** {remaining}'
-            em.set_footer(text=f'{action.title()} in `Astemia`')
+            em.set_footer(text=f'{action.title()} in `Vystalia`')
             em.timestamp = datetime.datetime.now(datetime.timezone.utc)
             await utils.try_dm(user, embed=em)
         except disnake.Forbidden:
@@ -216,7 +216,7 @@ class AutoMod(commands.Cog):
         content = utils.remove_zalgos(message.content.replace(' ', '').replace('\\', ''))
         matches = utils.INVITE_REGEX.findall(content)
         if matches:
-            guild = self.bot.get_guild(1097610034701144144)
+            guild = self.bot.get_guild(1102654728350998542)
             ukiyo_invites = [inv.code for inv in await guild.invites()]
             try:
                 ukiyo_invites.append((await guild.vanity_invite()).code)
@@ -226,7 +226,7 @@ class AutoMod(commands.Cog):
                 await utils.try_delete(message)
                 await utils.try_dm(
                     message.author,
-                    'For advertisements please only use the <#1097610037289025640> channel.'
+                    'For advertisements please only use the <#1102654729890299984> channel.'
                 )
                 invite_bucket = self.invite_cooldown.get_bucket(message)
                 if invite_bucket.update_rate_limit(current):
@@ -266,7 +266,7 @@ class AutoMod(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message: disnake.Message):
         if message.author.bot or message.author.id == self.bot._owner_id or\
-                not message.guild or message.guild.id != 1097610034701144144 or \
+                not message.guild or message.guild.id != 1102654728350998542 or \
                 StaffRoles.owner in (r.id for r in message.author.roles) or \
                 not message.content:
             return
@@ -278,7 +278,7 @@ class AutoMod(commands.Cog):
     @commands.Cog.listener()
     async def on_message_edit(self, before: disnake.Message, after: disnake.Message):
         if after.author.bot or after.author.id == self.bot._owner_id or \
-                not after.guild or after.guild.id != 1097610034701144144 or \
+                not after.guild or after.guild.id != 1102654728350998542 or \
                 StaffRoles.owner in (r.id for r in after.author.roles) or \
                 not after.content:
             return
@@ -290,5 +290,5 @@ class AutoMod(commands.Cog):
     coros = [anti_bad_words, anti_invites, anti_raid, anti_newlines, anti_emojis]
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(AutoMod(bot))

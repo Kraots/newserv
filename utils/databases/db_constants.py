@@ -11,7 +11,7 @@ instance = Instance(database8)
 class Constants(Document, GetDoc):
     """This is really just meant to store random stuff, enabled/disabled stuff or values."""
 
-    id = IntField(attribute='_id', default=745298049567424623)
+    id = IntField(attribute='_id', default=1102653969483976725)
     disabled_commands = ListField(StrField(), default=[])
     calculator_ternary = BooleanField(default=False)
     min_account_age = IntField(default=7)

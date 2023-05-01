@@ -28,7 +28,7 @@ class ReturnData:
 class GithubSource:
     """Displays information about the bot's source code."""
 
-    BOT_REPO_URL = 'https://github.com/Kraots/astemia'
+    BOT_REPO_URL = 'https://github.com/Kraots/vystalia'
 
     def __init__(
         self, bot_avatar: str, max_lines: int = 20
@@ -44,7 +44,7 @@ class GithubSource:
 
         data = ReturnData()
         if cmd is None:
-            embed = disnake.Embed(title="Astemia's GitHub Repository")
+            embed = disnake.Embed(title="Vystalia's GitHub Repository")
             embed.add_field(name="Repository", value=f"[View on GitHub]({self.BOT_REPO_URL})")
             embed.set_thumbnail(url=self.bot_avatar)
             data.embed = embed
@@ -85,7 +85,7 @@ class GithubSource:
 
         lines = '\n'.join(lines)
 
-        embed = disnake.Embed(title="Astemia's Source Link", description=f"{url}")
+        embed = disnake.Embed(title="Vystalia's Source Link", description=f"{url}")
         embed.add_field(
             name="Source Code Snippet", value=f"```python\n{lines}\n```"
         )

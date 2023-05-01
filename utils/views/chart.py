@@ -42,7 +42,7 @@ class SelectWhoseData(disnake.ui.Select['SelectChart']):
 
         em = disnake.Embed(
             title=(self.view.user.display_name + '\'s activity stats' if self.view.whose_data == 'user' else
-                   'Astemia\'s stats'),
+                   'Vystalia\'s stats'),
             color=blurple
         )
         em.set_image(url=f'attachment://{file.filename}')
@@ -83,7 +83,7 @@ class SelectTimeFrame(disnake.ui.Select['SelectChart']):
 
         em = disnake.Embed(
             title=(self.view.user.display_name + '\'s activity stats' if self.view.whose_data == 'user' else
-                   'Astemia\'s stats'),
+                   'Vystalia\'s stats'),
             color=blurple
         )
         em.set_image(url=f'attachment://{file.filename}')

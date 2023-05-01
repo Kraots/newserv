@@ -29,7 +29,7 @@ from utils import (
 
 from jishaku.shell import ShellReader
 
-from main import Astemia
+from main import Vystalia
 
 SERVER_AD = """
 𓆱𓇟.ꜱᴀʏ ʜᴇʟʟᴏ ᴛᴏ ᴀꜱᴛᴇᴍɪᴀ.𓇟𓆱
@@ -67,7 +67,7 @@ functions = {
 
 class Misc(commands.Cog):
     """Miscellaneous commands, basically commands that i have no fucking idea where to fucking put so they just come in this category."""
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
         self.github_client = utils.GithubClient(bot)
 
@@ -79,7 +79,7 @@ class Misc(commands.Cog):
     async def ping(self, ctx: Context):
         """See the bot's ping.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
@@ -103,7 +103,7 @@ class Misc(commands.Cog):
     async def uptime(self, ctx: Context):
         """See how long the bot has been online for.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
@@ -157,7 +157,7 @@ class Misc(commands.Cog):
         )
         em.add_field(
             name='Extras',
-            value=f'Running on commit [``{self.bot.git_hash[:7]}``](https://github.com/Kraots/astemia/tree/{self.bot.git_hash})'
+            value=f'Running on commit [``{self.bot.git_hash[:7]}``](https://github.com/Kraots/vystalia/tree/{self.bot.git_hash})'
                   f'\nCommands: {commands}'
                   f'\nExtensions: {extensions}'
                   f'\nUptime: {utils.human_timedelta(dt=self.bot.uptime, suffix=False)}',
@@ -175,7 +175,7 @@ class Misc(commands.Cog):
     async def _invite(self, ctx: Context):
         """Sends an invite that never expires.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
@@ -187,7 +187,7 @@ class Misc(commands.Cog):
     async def serverad(self, ctx: Context):
         """See the server's ad.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
@@ -358,7 +358,7 @@ class Misc(commands.Cog):
 
         `member` **->** The member that you want to see the avatar of. If you want to see your own avatar, you can ignore this since it defaults to you.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
@@ -376,7 +376,7 @@ class Misc(commands.Cog):
 
         `user` **->** The user that you want to see the date of when they created their discord account. If you want to see your own account creation date, you can ignore this since it defaults to you.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """  # noqa
 
         if await ctx.check_channel() is False:
@@ -390,8 +390,8 @@ class Misc(commands.Cog):
                         f'on {utils.format_dt(user.created_at, "F")} '
                         f'(`{utils.human_timedelta(user.created_at, accuracy=6)}`)'
         )
-        if user.id in [m.id for m in ctx.astemia.members if not m.bot]:
-            sorted_users: list[disnake.Member] = sorted(ctx.astemia.members, key=lambda m: m.created_at)
+        if user.id in [m.id for m in ctx.vystalia.members if not m.bot]:
+            sorted_users: list[disnake.Member] = sorted(ctx.vystalia.members, key=lambda m: m.created_at)
             users_ids = [u.id for u in sorted_users]
             pos = users_ids.index(user.id) + 1
             em.set_footer(text=f'{utils.format_position(pos)} oldest account in this server')
@@ -402,15 +402,15 @@ class Misc(commands.Cog):
         """
         See the date when the server got created at and when it was made public.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
             return
 
-        created_date = ctx.astemia.created_at
-        publiced_date = ctx.astemia.get_member(302050872383242240).joined_at
-        members = [m for m in ctx.astemia.members if not m.bot]
+        created_date = ctx.vystalia.created_at
+        publiced_date = ctx.vystalia.get_member(302050872383242240).joined_at
+        members = [m for m in ctx.vystalia.members if not m.bot]
         em = disnake.Embed(colour=utils.red, title='Server Creation')
         em.add_field(
             name='Created At',
@@ -433,7 +433,7 @@ class Misc(commands.Cog):
 
         `member` **->** The member that you want to see the date of when they joined this server. If you want to see your own join date, you can ignore this since it defaults to you.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """  # noqa
 
         if await ctx.check_channel() is False:
@@ -447,7 +447,7 @@ class Misc(commands.Cog):
                         f'on {utils.format_dt(member.joined_at, "F")} '
                         f'(`{utils.human_timedelta(member.joined_at, accuracy=6)}`)'
         )
-        sorted_users: list[disnake.Member] = sorted(ctx.astemia.members, key=lambda m: m.joined_at)
+        sorted_users: list[disnake.Member] = sorted(ctx.vystalia.members, key=lambda m: m.joined_at)
         users_ids = [u.id for u in sorted_users if not u.bot]
         pos = users_ids.index(member.id) + 1
         em.set_footer(text=f'Join Position: {utils.format_position(pos)}')
@@ -457,8 +457,8 @@ class Misc(commands.Cog):
     async def member_count(self, ctx: Context):
         """Shows how many members the server has, as well as how many are verified and how many are not."""
 
-        members = len([m for m in ctx.astemia.members if not m.bot])
-        bots = len([b for b in ctx.astemia.members if b.bot])
+        members = len([m for m in ctx.vystalia.members if not m.bot])
+        bots = len([b for b in ctx.vystalia.members if b.bot])
         verified = len(await self.bot.db.find('intros'))
         unverified = members - verified
 
@@ -492,7 +492,7 @@ class Misc(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_remove(self, member: disnake.Member):
-        if member.guild.id != 1097610034701144144:
+        if member.guild.id != 1102654728350998542:
             return
 
         await self.bot.db.delete('afks', {'_id': member.id})
@@ -517,7 +517,7 @@ class Misc(commands.Cog):
                     continue
 
                 index += 1
-                key = ctx.astemia.get_member(mute.id)
+                key = ctx.vystalia.get_member(mute.id)
                 if key is None:
                     key = f'[LEFT] {mute.id}'
 
@@ -530,7 +530,7 @@ class Misc(commands.Cog):
                     expire_date = utils.format_dt(mute.muted_until, "F")
                     remaining = utils.human_timedelta(mute.muted_until, suffix=False, accuracy=6)
 
-                value = f'**Muted By:** {ctx.astemia.get_member(mute.muted_by)}\n' \
+                value = f'**Muted By:** {ctx.vystalia.get_member(mute.muted_by)}\n' \
                         f'**Reason:** {mute.reason}\n' \
                         f'**Mute Duration:** `{_duration}`\n' \
                         f'**Expires At:** {expire_date}\n' \
@@ -564,7 +564,7 @@ class Misc(commands.Cog):
                 expire_date = utils.format_dt(mute.muted_until, "F")
                 remaining = utils.human_timedelta(mute.muted_until, suffix=False, accuracy=6)
 
-            em.description = f'**Muted By:** {ctx.astemia.get_member(mute.muted_by)}\n' \
+            em.description = f'**Muted By:** {ctx.vystalia.get_member(mute.muted_by)}\n' \
                              f'**Reason:** {mute.reason}\n' \
                              f'**Mute Duration:** `{_duration}`\n' \
                              f'**Expires At:** {expire_date}\n' \
@@ -592,7 +592,7 @@ class Misc(commands.Cog):
                     continue
 
                 index += 1
-                key = ctx.astemia.get_member(block.id)
+                key = ctx.vystalia.get_member(block.id)
                 if key is None:
                     key = f'[LEFT] {block.id}'
 
@@ -605,7 +605,7 @@ class Misc(commands.Cog):
                     expire_date = utils.format_dt(block.muted_until, "F")
                     remaining = utils.human_timedelta(block.muted_until, suffix=False, accuracy=6)
 
-                value = f'**Blocked By:** {ctx.astemia.get_member(block.muted_by)}\n' \
+                value = f'**Blocked By:** {ctx.vystalia.get_member(block.muted_by)}\n' \
                         f'**Reason:** {block.reason}\n' \
                         f'**Block Duration:** `{_duration}`\n' \
                         f'**Expires At:** {expire_date}\n' \
@@ -638,7 +638,7 @@ class Misc(commands.Cog):
 
             em = disnake.Embed(colour=utils.blurple)
             em.set_author(name=utils.format_name(member), icon_url=member.display_avatar)
-            em.description = f'**Blocked By:** {ctx.astemia.get_member(block.muted_by)}\n' \
+            em.description = f'**Blocked By:** {ctx.vystalia.get_member(block.muted_by)}\n' \
                              f'**Reason:** {block.reason}\n' \
                              f'**Block Duration:** `{_duration}`\n' \
                              f'**Expires At:** {expire_date}\n' \
@@ -662,7 +662,7 @@ class Misc(commands.Cog):
         mod_icon = '<:moderator:938486811955703818>'
         admin_icon = '<:admin:938486758117638286>'
 
-        for mem in ctx.astemia.members:
+        for mem in ctx.vystalia.members:
             if utils.StaffRoles.owner in (r.id for r in mem.roles):  # Checks for owner
                 if not mem.bot:
                     if len(all_status[str(mem.status)]['users']) == 0:
@@ -804,7 +804,7 @@ class Misc(commands.Cog):
 
         `query` **->** What to search on wikipedia for.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
@@ -828,7 +828,7 @@ class Misc(commands.Cog):
 
         `query` **->** What to search for using the urban dictionary.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
@@ -892,7 +892,7 @@ class Misc(commands.Cog):
 
         `command` **->** The command you want to see. Can either be a prefixed command or a slash command.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
@@ -916,7 +916,7 @@ class Misc(commands.Cog):
 
         `username` **->** The user's github name.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
@@ -931,7 +931,7 @@ class Misc(commands.Cog):
 
         `repo` **->** The repo to search for.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
@@ -992,7 +992,7 @@ class Misc(commands.Cog):
             bbox_to_anchor=(1, 0, 0.8, 1)
         )
         plt.setp(autotexts, size=8, weight='bold')
-        ax.set_title('Astemia Gender Stats')
+        ax.set_title('Vystalia Gender Stats')
 
         plt.savefig('gender_stats.png', bbox_inches='tight')
         file = disnake.File('gender_stats.png')
@@ -1046,7 +1046,7 @@ class Misc(commands.Cog):
         code
         \`\`\`
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
@@ -1347,14 +1347,14 @@ class Misc(commands.Cog):
     async def check_boosters(self, ctx: Context):
         """See all the kitties that are currently boosting the server, in order based on the date they started boosting.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
             return
 
         boosters = []
-        sorted_ = sorted(ctx.astemia.premium_subscribers, key=lambda m: m.premium_since)
+        sorted_ = sorted(ctx.vystalia.premium_subscribers, key=lambda m: m.premium_since)
         for index, member in enumerate(sorted_):
             boosters.append(
                 (
@@ -1367,7 +1367,7 @@ class Misc(commands.Cog):
 
         source = utils.FieldPageSource(boosters, per_page=5)
         source.embed.color = utils.booster_pink
-        source.embed.title = 'Here\'s all the kitties of `Astemia`'
+        source.embed.title = 'Here\'s all the kitties of `Vystalia`'
         pag = utils.RoboPages(source, ctx=ctx, compact=True)
         await pag.start(ref=True)
 
@@ -1447,5 +1447,5 @@ class Misc(commands.Cog):
         await paginator.start(ref=True)
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(Misc(bot))

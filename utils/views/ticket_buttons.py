@@ -14,17 +14,17 @@ from utils import Ticket
 from .confirm_buttons import ConfirmViewInteraction
 
 if TYPE_CHECKING:
-    from main import Astemia
+    from main import Vystalia
 
 __all__ = ('TicketView', 'OpenTicketView')
 
 
 class TicketView(View):
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         super().__init__(timeout=None)
         self.bot = bot
 
-    @disnake.ui.button(label='Close', emoji='<:trash:938412197967724554>', custom_id='astemia:tickets')
+    @disnake.ui.button(label='Close', emoji='<:trash:938412197967724554>', custom_id='vystalia:tickets')
     async def close(self, button: Button, inter: disnake.MessageInteraction):
         await inter.response.defer()
         ticket: Ticket = await self.bot.db.get('tickets', inter.channel.id)
@@ -66,7 +66,7 @@ class TicketView(View):
 
 
 class OpenTicketView(View):
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         super().__init__(timeout=None)
         self.bot = bot
 
@@ -94,7 +94,7 @@ class OpenTicketView(View):
         self.cooldowns[user_id] = now + relativedelta(seconds=30.0)
         return True
 
-    @disnake.ui.button(label='🎟️ Open Ticket', custom_id='astemia:open_ticket', style=disnake.ButtonStyle.blurple)
+    @disnake.ui.button(label='🎟️ Open Ticket', custom_id='vystalia:open_ticket', style=disnake.ButtonStyle.blurple)
     async def open_ticket(self, button: Button, inter: disnake.MessageInteraction):
         await asyncio.sleep(.5)
         await inter.response.defer()
@@ -132,7 +132,7 @@ class OpenTicketView(View):
         ticket_id = '1' if not total_tickets else str(int(total_tickets[0].ticket_id) + 1)
         ch_name = f'{inter.author.display_name}-ticket #' + ticket_id
 
-        guild = self.bot.get_guild(1097610034701144144)
+        guild = self.bot.get_guild(1102654728350998542)
         categ = guild.get_channel(utils.Categories.tickets)
         channel = await guild.create_text_channel(
             ch_name,

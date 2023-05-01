@@ -4,12 +4,12 @@ from disnake.ext import commands
 import utils
 from utils import Context
 
-from main import Astemia
+from main import Vystalia
 
 
 class Actions(commands.Cog):
     """Action commands."""
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
 
     @property
@@ -107,5 +107,5 @@ class Actions(commands.Cog):
         await ctx.reply(user.mention, embed=em)
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(Actions(bot))

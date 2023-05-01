@@ -13,7 +13,7 @@ from utils import Context
 
 import mafic
 
-from main import Astemia
+from main import Vystalia
 
 
 class AudioData(NamedTuple):
@@ -154,7 +154,7 @@ class Queue:
 
 
 class Music(commands.Cog):
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
 
         self.dj: disnake.Member = None
@@ -200,7 +200,7 @@ class Music(commands.Cog):
         after: disnake.VoiceState
     ):
         if (
-            (member.guild.id != 1097610034701144144) or
+            (member.guild.id != 1102654728350998542) or
             (before.channel is None) or
             (member.bot is True) or
             (member.guild.voice_client is None)
@@ -708,5 +708,5 @@ class Music(commands.Cog):
             await self.ensure_voice_chat(ctx)
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(Music(bot))

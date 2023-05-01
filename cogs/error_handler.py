@@ -2,11 +2,11 @@ from disnake.ext import commands
 
 from utils import Context
 
-from main import Astemia
+from main import Vystalia
 
 
 class ErrorHandler(commands.Cog):
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
 
     @commands.Cog.listener()
@@ -22,5 +22,5 @@ class ErrorHandler(commands.Cog):
         await ctx.reraise(error)
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(ErrorHandler(bot))

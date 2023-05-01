@@ -7,13 +7,13 @@ from utils import (
     ToDo,
 )
 
-from main import Astemia
+from main import Vystalia
 
 
 class ToDos(commands.Cog):
     """Todo related commands."""
 
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
 
     @property
@@ -115,11 +115,11 @@ class ToDos(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_remove(self, member: disnake.Member):
-        if member.guild.id != 1097610034701144144:
+        if member.guild.id != 1102654728350998542:
             return
 
         await self.bot.db.delete('todos', {'_id': member.id})
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(ToDos(bot))

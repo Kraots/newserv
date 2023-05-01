@@ -38,46 +38,46 @@ class GameButtonRoles(disnake.ui.View):
         await inter.author.edit(roles=roles, reason='Game role update.')
         return await inter.send(f'I have added `{button.label}` to your roles.', ephemeral=True)
 
-    @disnake.ui.button(label='Apex', custom_id='astemia:game_roles:apex', row=0, style=disnake.ButtonStyle.blurple)
+    @disnake.ui.button(label='Apex', custom_id='vystalia:game_roles:apex', row=0, style=disnake.ButtonStyle.blurple)
     async def apex(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
         await self.handle_role(button, inter)
 
-    @disnake.ui.button(label='League of Legends', custom_id='astemia:game_roles:lol', row=0, style=disnake.ButtonStyle.blurple)
+    @disnake.ui.button(label='League of Legends', custom_id='vystalia:game_roles:lol', row=0, style=disnake.ButtonStyle.blurple)
     async def lol(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
         await self.handle_role(button, inter)
 
-    @disnake.ui.button(label='Genshin', custom_id='astemia:game_roles:genshin', row=0, style=disnake.ButtonStyle.blurple)
+    @disnake.ui.button(label='Genshin', custom_id='vystalia:game_roles:genshin', row=0, style=disnake.ButtonStyle.blurple)
     async def genshin(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
         await self.handle_role(button, inter)
 
-    @disnake.ui.button(label='Grand Theft Auto V', custom_id='astemia:game_roles:gtav', row=1, style=disnake.ButtonStyle.blurple)
+    @disnake.ui.button(label='Grand Theft Auto V', custom_id='vystalia:game_roles:gtav', row=1, style=disnake.ButtonStyle.blurple)
     async def gtav(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
         await self.handle_role(button, inter)
 
-    @disnake.ui.button(label='Valorant', custom_id='astemia:game_roles:valo', row=1, style=disnake.ButtonStyle.blurple)
+    @disnake.ui.button(label='Valorant', custom_id='vystalia:game_roles:valo', row=1, style=disnake.ButtonStyle.blurple)
     async def valo(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
         await self.handle_role(button, inter)
 
-    @disnake.ui.button(label='CS:GO', custom_id='astemia:game_roles:csgo', row=1, style=disnake.ButtonStyle.blurple)
+    @disnake.ui.button(label='CS:GO', custom_id='vystalia:game_roles:csgo', row=1, style=disnake.ButtonStyle.blurple)
     async def csgo(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
         await self.handle_role(button, inter)
 
-    @disnake.ui.button(label='Rocket League', custom_id='astemia:game_roles:rocket_league', row=2, style=disnake.ButtonStyle.blurple)
+    @disnake.ui.button(label='Rocket League', custom_id='vystalia:game_roles:rocket_league', row=2, style=disnake.ButtonStyle.blurple)
     async def rocket_league(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
         await self.handle_role(button, inter)
 
-    @disnake.ui.button(label='Dead by Daylight', custom_id='astemia:game_roles:dbd', row=2, style=disnake.ButtonStyle.blurple)
+    @disnake.ui.button(label='Dead by Daylight', custom_id='vystalia:game_roles:dbd', row=2, style=disnake.ButtonStyle.blurple)
     async def dbd(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
         await self.handle_role(button, inter)
 
-    @disnake.ui.button(label='Minecraft', custom_id='astemia:game_roles:mc', row=2, style=disnake.ButtonStyle.blurple)
+    @disnake.ui.button(label='Minecraft', custom_id='vystalia:game_roles:mc', row=2, style=disnake.ButtonStyle.blurple)
     async def mc(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
         await self.handle_role(button, inter)
 
-    @disnake.ui.button(label='Roblox', custom_id='astemia:game_roles:rblx', row=3, style=disnake.ButtonStyle.blurple)
+    @disnake.ui.button(label='Roblox', custom_id='vystalia:game_roles:rblx', row=3, style=disnake.ButtonStyle.blurple)
     async def rblx(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
         await self.handle_role(button, inter)
 
-    @disnake.ui.button(label='Fortnite', custom_id='astemia:game_roles:fortnite', row=3, style=disnake.ButtonStyle.blurple)
+    @disnake.ui.button(label='Fortnite', custom_id='vystalia:game_roles:fortnite', row=3, style=disnake.ButtonStyle.blurple)
     async def fortnite(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
         await self.handle_role(button, inter)

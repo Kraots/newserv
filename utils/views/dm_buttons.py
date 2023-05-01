@@ -1,7 +1,7 @@
 import disnake
 
 dm_statuses = {
-    'Open': 1097610034843750511, 'Ask': 1097610034843750510, 'Closed': 1097610034780831750
+    'Open': 1102654728720097374, 'Ask': 1102654728720097373, 'Closed': 1102654728720097372
 }
 
 __all__ = (
@@ -21,14 +21,14 @@ class DMButtonRoles(disnake.ui.View):
         await inter.author.edit(roles=roles)
         await inter.send(f'I have changed your dm status role to `{button.label}`', ephemeral=True)
 
-    @disnake.ui.button(label='Open', custom_id='astemia:dm_statuses:open', row=0, style=disnake.ButtonStyle.blurple)
+    @disnake.ui.button(label='Open', custom_id='vystalia:dm_statuses:open', row=0, style=disnake.ButtonStyle.blurple)
     async def open(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
         await self.handle_role(button, inter)
 
-    @disnake.ui.button(label='Ask', custom_id='astemia:dm_statuses:ask', row=0, style=disnake.ButtonStyle.blurple)
+    @disnake.ui.button(label='Ask', custom_id='vystalia:dm_statuses:ask', row=0, style=disnake.ButtonStyle.blurple)
     async def ask(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
         await self.handle_role(button, inter)
 
-    @disnake.ui.button(label='Closed', custom_id='astemia:dm_statuses:closed', row=0, style=disnake.ButtonStyle.blurple)
+    @disnake.ui.button(label='Closed', custom_id='vystalia:dm_statuses:closed', row=0, style=disnake.ButtonStyle.blurple)
     async def closed(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
         await self.handle_role(button, inter)

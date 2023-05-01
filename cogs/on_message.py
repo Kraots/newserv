@@ -9,7 +9,7 @@ from disnake.ext import commands
 
 import utils
 
-from main import Astemia
+from main import Vystalia
 
 functions = {
     'sqrt': lambda x: math.sqrt(x),
@@ -27,7 +27,7 @@ functions = {
 
 
 class OnMessage(commands.Cog):
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
         self.github_client = utils.GithubClient(bot)
 
@@ -123,7 +123,7 @@ class OnMessage(commands.Cog):
     async def check_usernames_and_tokens(self, message: disnake.Message):
         await self.check_tokens(message)
 
-        if message.guild and message.guild.id == 1097610034701144144 and not message.author.bot:
+        if message.guild and message.guild.id == 1102654728350998542 and not message.author.bot:
             if message.author.id != self.bot._owner_id and message.content != '':
                 await utils.check_username(self.bot, message.author, bad_words=self.bot.bad_words.keys())
 
@@ -265,11 +265,11 @@ class OnMessage(commands.Cog):
 
     @commands.Cog.listener('on_message')
     async def check_for_voice_message(self, message: disnake.Message):
-        if message.guild.id == 1097610034701144144:
+        if message.guild.id == 1102654728350998542:
             for attachment in message.attachments:
                 if attachment.url.endswith('.ogg') or 'voice-message' in attachment.url:
                     return await message.delete()
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(OnMessage(bot))

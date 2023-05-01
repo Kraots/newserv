@@ -12,7 +12,7 @@ from utils import (
     TicketView
 )
 
-from main import Astemia
+from main import Vystalia
 
 
 class SnipesPageEntry:
@@ -35,7 +35,7 @@ class SnipesPages(utils.RawSimplePages):
 class Featured(commands.Cog):
     """Featured cool commands."""
 
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
         self.snipes: dict[int, list[disnake.Message]] = {}  # {channel_id: [message, message, ...]}
 
@@ -87,8 +87,8 @@ class Featured(commands.Cog):
         ticket_id = '1' if not total_tickets else str(int(total_tickets[0].ticket_id) + 1)
         ch_name = f'{ctx.author.display_name}-ticket #' + ticket_id
 
-        categ = ctx.astemia.get_channel(utils.Categories.tickets)
-        channel = await ctx.astemia.create_text_channel(
+        categ = ctx.vystalia.get_channel(utils.Categories.tickets)
+        channel = await ctx.vystalia.create_text_channel(
             ch_name,
             category=categ,
             reason=f'Ticket Creation by {utils.format_name(ctx.author)} (ID: {ctx.author.id})'
@@ -121,7 +121,7 @@ class Featured(commands.Cog):
         v = View()
         v.add_item(Button(label='Jump!', url=m.jump_url))
 
-        staff_chat = ctx.astemia.get_channel(utils.Channels.staff_chat)
+        staff_chat = ctx.vystalia.get_channel(utils.Channels.staff_chat)
         await staff_chat.send(
             f'@everyone New ticket has been created by `{utils.format_name(ctx.author)}`',
             allowed_mentions=disnake.AllowedMentions(everyone=True),
@@ -141,12 +141,12 @@ class Featured(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_remove(self, member: disnake.Member):
-        if member.guild.id != 1097610034701144144:
+        if member.guild.id != 1102654728350998542:
             return
 
         tickets = await self.bot.db.find('tickets', {'owner_id': member.id})
         for ticket in tickets:
-            guild = self.bot.get_guild(1097610034701144144)
+            guild = self.bot.get_guild(1102654728350998542)
             ch = guild.get_channel(ticket.pk)
             await ch.delete(reason='Member left.')
             await self.bot.db.delete('tickets', {'_id': ticket.pk})
@@ -158,8 +158,8 @@ class Featured(commands.Cog):
         `count` **->** The amount of how many new users you want to see. The minimum is 3 and it defaults to 3.
         """
 
-        count = min(max(count, 3), ctx.astemia.member_count)
-        users: list[disnake.Member] = sorted(ctx.astemia.members, key=lambda m: m.joined_at, reverse=True)
+        count = min(max(count, 3), ctx.vystalia.member_count)
+        users: list[disnake.Member] = sorted(ctx.vystalia.members, key=lambda m: m.joined_at, reverse=True)
         entries = []
         for index, user in enumerate(users):
             if index >= count:
@@ -196,7 +196,7 @@ class Featured(commands.Cog):
             if bad_words is not None and utils.check_profanity(message.content, bad_words=bad_words) is True:
                 return
             elif matches:
-                guild = self.bot.get_guild(1097610034701144144)
+                guild = self.bot.get_guild(1102654728350998542)
                 ukiyo_invites = [inv.code for inv in await guild.invites()]
                 try:
                     ukiyo_invites.append((await guild.vanity_invite()).code)
@@ -370,5 +370,5 @@ class Featured(commands.Cog):
         await ctx.reply(embed=em)
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(Featured(bot))

@@ -239,7 +239,7 @@ async def check_username(bot, member: disnake.Member, *, bad_words: list):
         return await member.send(
             'Your name has too few pingable letters in a row, '
             f'is a bad word or is too short (minimum is **4**) so I changed it to `{new_nick}`\n'
-            'You can always change your nickname by using the command `!nick new_nick` in <#1097610036026548293>'
+            'You can always change your nickname by using the command `!nick new_nick` in <#1102654729387004047>'
         )
     except disnake.Forbidden:
         return

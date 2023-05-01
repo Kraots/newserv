@@ -10,7 +10,7 @@ from disnake.ext import commands
 import utils
 from utils import Tags
 
-from main import Astemia
+from main import Vystalia
 
 
 async def tag_name(inter: disnake.ApplicationCommandInteraction, argument: str):
@@ -33,7 +33,7 @@ async def tag_name(inter: disnake.ApplicationCommandInteraction, argument: str):
 class InteractiveTagCreation(disnake.ui.View):
     def __init__(
         self,
-        bot: Astemia,
+        bot: Vystalia,
         original_interaction: AppCmdInter,
         edit: Tags = None
     ):
@@ -216,7 +216,7 @@ class InteractiveTagCreation(disnake.ui.View):
 
 class _Tags(commands.Cog, name='Tags'):
 
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
 
     @property
@@ -444,7 +444,7 @@ class _Tags(commands.Cog, name='Tags'):
         em = disnake.Embed(color=utils.blurple)
         em.add_field(name='Tag Name', value=tag.name)
 
-        usr = self.bot.get_guild(1097610034701144144).get_member(tag.owned_by)
+        usr = self.bot.get_guild(1102654728350998542).get_member(tag.owned_by)
         em.add_field(name='Owned By', value=f'{utils.format_name(usr)}')
 
         em.add_field(name='Uses', value=f'{tag.uses:,}', inline=False)
@@ -485,9 +485,9 @@ class _Tags(commands.Cog, name='Tags'):
 
     @commands.Cog.listener('on_member_remove')
     async def del_all_user_tags_on_leave(self, member: disnake.Member):
-        if member.guild.id == 1097610034701144144:
+        if member.guild.id == 1102654728350998542:
             await self.bot.db.delete('tags', {'owned_by': member.id})
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(_Tags(bot))

@@ -10,7 +10,7 @@ from disnake.ui import View, button
 import utils
 
 if TYPE_CHECKING:
-    from main import Astemia
+    from main import Vystalia
 
 __all__ = (
     'GiveAwayCreationView',
@@ -22,7 +22,7 @@ class JoinGiveawayButton(disnake.ui.Button):
     def __init__(self, label: str = '0'):
         super().__init__(
             label=f'{label} participants',
-            custom_id='astemia:giveaways:join_btn',
+            custom_id='vystalia:giveaways:join_btn',
             style=disnake.ButtonStyle.blurple,
             emoji='🎉'
         )
@@ -63,7 +63,7 @@ class JoinGiveawayButton(disnake.ui.Button):
 
 
 class GiveAwayCreationView(View):
-    def __init__(self, bot: Astemia, author: disnake.Member):
+    def __init__(self, bot: Vystalia, author: disnake.Member):
         super().__init__()
         self.bot = bot
         self.author = author
@@ -231,7 +231,7 @@ class GiveAwayCreationView(View):
             return await inter.response.edit_message(content='You didn\'t set the duration!')
         await inter.response.edit_message(view=None)
 
-        guild = self.bot.get_guild(1097610034701144144)
+        guild = self.bot.get_guild(1102654728350998542)
         news_channel = guild.get_channel(utils.Channels.news)
         em = disnake.Embed(
             colour=utils.green,

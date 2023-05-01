@@ -66,7 +66,7 @@ class IntroField(disnake.ui.Select['IntroFields']):
         self.add_option(label='Dislikes')
 
     async def delete_intro_message(self, data: utils.Intro):
-        channel = self.view.ctx.astemia.get_channel(utils.Channels.intros)
+        channel = self.view.ctx.vystalia.get_channel(utils.Channels.intros)
         await utils.try_delete(channel=channel, message_id=data.message_id)
 
     async def callback(self, inter: disnake.MessageInteraction):
@@ -169,7 +169,7 @@ class IntroField(disnake.ui.Select['IntroFields']):
 
         await self.delete_intro_message(data)
 
-        channel = self.view.ctx.astemia.get_channel(utils.Channels.intros)
+        channel = self.view.ctx.vystalia.get_channel(utils.Channels.intros)
         m = await channel.send(embed=em)
 
         data.message_id = m.id

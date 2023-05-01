@@ -11,7 +11,7 @@ import utils
 from utils import Game
 
 if TYPE_CHECKING:
-    from main import Astemia
+    from main import Vystalia
 
 __all__ = ('BlackJack',)
 
@@ -102,7 +102,7 @@ class BlackJack(View):
     def __init__(
         self,
         user: disnake.Member,
-        bot: Astemia,
+        bot: Vystalia,
         bet_amount: int
     ):
         super().__init__(timeout=15.0)

@@ -39,8 +39,8 @@ class Context(commands.Context):
         return f'>>> {self.disagree}'
 
     @property
-    def astemia(self) -> disnake.Guild:
-        return self.bot.get_guild(1097610034701144144)
+    def vystalia(self) -> disnake.Guild:
+        return self.bot.get_guild(1102654728350998542)
 
     @disnake.utils.cached_property
     def replied_reference(self) -> disnake.MessageReference | None:
@@ -70,7 +70,7 @@ class Context(commands.Context):
         if self.channel.id not in (
             Channels.bots, Channels.bot_commands, Channels.staff_chat
         ) \
-                and self.author.id != 745298049567424623:
+                and self.author.id != 1102653969483976725:
             await utils.try_delete(self.message, delay=10.0)
             await self.reply(
                 f'{self.denial} Sorry! This command can only be used in <#{Channels.bots}>',
@@ -85,9 +85,9 @@ class Context(commands.Context):
         *,
         reason: str = 'That member is above or equal to you. Cannot do that.'
     ) -> bool:
-        if self.author.id == 745298049567424623:
+        if self.author.id == 1102653969483976725:
             return True
-        elif member.id == 745298049567424623:
+        elif member.id == 1102653969483976725:
             await self.reply(
                 f'{self.denial} That member is above or equal to you. '
                 'Cannot do that. (above in this case you sub bottom <:kek:1097656660241166356>)'

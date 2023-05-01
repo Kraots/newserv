@@ -12,14 +12,14 @@ from disnake.ext import commands
 import utils
 from utils import Context, TextPage, clean_code, Constants
 
-from main import Astemia
+from main import Vystalia
 
 TO_REPLACE = os.getenv('NAMETOREPLACE')
 
 
 class Developer(commands.Cog):
     """Dev only commands."""
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
 
     async def cog_check(self, ctx: Context):
@@ -40,7 +40,7 @@ class Developer(commands.Cog):
         **Local Variables**
         \u2800 • ``disnake`` **->** The disnake module.
         \u2800 • ``commands`` **->** The disnake.ext.commands module.
-        \u2800 • ``_bot`` **->** The bot instance. (`Astemia`)
+        \u2800 • ``_bot`` **->** The bot instance. (`Vystalia`)
         \u2800 • ``_ctx`` **->** The ``Context`` object of the command.
         \u2800 • ``_channel`` **->** The ``disnake.abc.GuildChannel`` the command is invoked in.
         \u2800 • ``_author`` **->** The ``disnake.Member`` of the command.
@@ -221,7 +221,7 @@ class Developer(commands.Cog):
     async def _bot_invite(self, ctx: Context, bot_id: int = None):
         """Sends the link to add the bot to a server (with all permissions enabled).
 
-        `bot_id` **->** The id of the bot you want the invite for, defaults to astemia.
+        `bot_id` **->** The id of the bot you want the invite for, defaults to vystalia.
         """
 
         if bot_id is None:
@@ -245,5 +245,5 @@ class Developer(commands.Cog):
                 await utils.try_delete(inter.message)
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(Developer(bot))

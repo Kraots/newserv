@@ -26,12 +26,12 @@ from utils import (
     Warns
 )
 
-from main import Astemia
+from main import Vystalia
 
 
 class Moderation(commands.Cog):
     """Staff related commands."""
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
         self.ignored_channels = (
             Channels.news, Channels.boosts, Channels.rules, Channels.welcome,
@@ -236,10 +236,10 @@ class Moderation(commands.Cog):
 
         await utils.try_dm(
             member,
-            f'> ⚠️ Hello! Sadly, you have been **banned** from `Astemia` for **{reason}**. Goodbye 👋'
+            f'> ⚠️ Hello! Sadly, you have been **banned** from `Vystalia` for **{reason}**. Goodbye 👋'
         )
 
-        await ctx.astemia.ban(
+        await ctx.vystalia.ban(
             member,
             reason=f'{utils.format_name(ctx.author)} ({ctx.author.id}): "{reason}"',
             delete_message_days=0
@@ -273,7 +273,7 @@ class Moderation(commands.Cog):
         """
 
         try:
-            await ctx.astemia.unban(user, reason=f'Unban by {utils.format_name(ctx.author)} ({ctx.author.id})')
+            await ctx.vystalia.unban(user, reason=f'Unban by {utils.format_name(ctx.author)} ({ctx.author.id})')
         except disnake.NotFound:
             return await ctx.reply(f'{ctx.denial} The user is not banned.')
 
@@ -304,7 +304,7 @@ class Moderation(commands.Cog):
 
         await utils.try_dm(
             member,
-            f'> ⚠️ Hello! Sadly, you have been **kicked** from `Astemia` for **{reason}**. Goodbye 👋'
+            f'> ⚠️ Hello! Sadly, you have been **kicked** from `Vystalia` for **{reason}**. Goodbye 👋'
         )
         await member.kick(reason=f'{utils.format_name(ctx.author)} ({ctx.author.id}): "{reason}"')
         await ctx.send(f'> 👌 Kicked `{member}` for **{reason}**')
@@ -341,7 +341,7 @@ class Moderation(commands.Cog):
         usr: Mutes = await self.bot.db.get('mutes', member.id)
         _ctx = ctx
         if usr is not None and usr.is_muted is True:
-            muted_by = ctx.astemia.get_member(usr.muted_by)
+            muted_by = ctx.vystalia.get_member(usr.muted_by)
             data = await UserFriendlyTime(commands.clean_content).convert(ctx, _time_and_reason)
             if usr.blocked is True and action == 'block':
                 if usr.filter is False:
@@ -465,7 +465,7 @@ class Moderation(commands.Cog):
         elif StaffRoles.moderator in (r.id for r in member.roles):  # Checks for mod
             data.is_mod = True
 
-        role = ctx.astemia.get_role(ExtraRoles.muted) if action == 'mute' else ctx.astemia.get_role(ExtraRoles.blocked)
+        role = ctx.vystalia.get_role(ExtraRoles.muted) if action == 'mute' else ctx.vystalia.get_role(ExtraRoles.blocked)
         new_roles = [role for role in member.roles
                      if role.id not in (StaffRoles.all)
                      ] + [role]
@@ -480,7 +480,7 @@ class Moderation(commands.Cog):
                          f'**Reason:** {reason}\n' \
                          f'**{action.title()} Duration:** `{human_timedelta(time, suffix=False)}`\n' \
                          f'**Expire Date:** {format_dt(time, "F")}'
-        em.set_footer(text=f'{fmt.title()} in `Astemia`')
+        em.set_footer(text=f'{fmt.title()} in `Vystalia`')
         em.timestamp = datetime.now(timezone.utc)
         await utils.try_dm(member, embed=em)
 
@@ -527,7 +527,7 @@ class Moderation(commands.Cog):
                 'his data has been deleted from the muted/blocked database.'
             )
 
-        muted_by = ctx.astemia.get_member(data.muted_by)
+        muted_by = ctx.vystalia.get_member(data.muted_by)
         if data.filter is False:
             if ctx.author.id not in (data.muted_by, self.bot._owner_id):
                 if data.muted_by == self.bot._owner_id or ctx.author.top_role < muted_by.top_role:
@@ -555,19 +555,19 @@ class Moderation(commands.Cog):
 
         new_roles = [role for role in member.roles if role.id not in (ExtraRoles.muted, ExtraRoles.blocked)]
         if data.is_owner is True:
-            owner_role = ctx.astemia.get_role(StaffRoles.owner)  # Check for owner
+            owner_role = ctx.vystalia.get_role(StaffRoles.owner)  # Check for owner
             new_roles += [owner_role]
         elif data.is_admin is True:
-            admin_role = ctx.astemia.get_role(StaffRoles.admin)  # Check for admin
+            admin_role = ctx.vystalia.get_role(StaffRoles.admin)  # Check for admin
             new_roles += [admin_role]
         elif data.is_mod is True:
-            mod_role = ctx.astemia.get_role(StaffRoles.moderator)  # Check for mod
+            mod_role = ctx.vystalia.get_role(StaffRoles.moderator)  # Check for mod
             new_roles += [mod_role]
         await member.edit(roles=new_roles, reason=f'[{action.upper()}] {action.title()} by {utils.format_name(ctx.author)} ({ctx.author.id})')
         if send_feedback is True:
             await utils.try_dm(
                 member,
-                f'Hello, you have been **un{fmt}** in `Astemia` by **{utils.format_name(ctx.author)}**'
+                f'Hello, you have been **un{fmt}** in `Vystalia` by **{utils.format_name(ctx.author)}**'
             )
 
             await ctx.reply(f'> 👌 Successfully **un{fmt}** {member.mention}')
@@ -686,7 +686,7 @@ class Moderation(commands.Cog):
         mutes: list[Mutes] = await self.bot.db.find_sorted('mutes', 'muted_until', 1, {'is_muted': True})
         for mute in mutes[:15]:
             if datetime.now(mute.muted_until.tzinfo) >= mute.muted_until:
-                guild = self.bot.get_guild(1097610034701144144)
+                guild = self.bot.get_guild(1102654728350998542)
                 member = guild.get_member(mute.id)
                 _mem = f'**[LEFT]** (`{mute.id}`)'
                 if mute.blocked is True:
@@ -711,7 +711,7 @@ class Moderation(commands.Cog):
                     await member.edit(roles=new_roles, reason=f'[{fmt.upper()}] {action.title()} Expired.')
                     await utils.try_dm(
                         member,
-                        f'Hello, your **{action}** in `Astemia` has expired. You have been **{fmt}**.'
+                        f'Hello, your **{action}** in `Vystalia` has expired. You have been **{fmt}**.'
                     )
 
                 if mute.filter is True:
@@ -750,7 +750,7 @@ class Moderation(commands.Cog):
             if datetime.now() >= mute.streak_expire_date:
                 await self.bot.db.delete('mutes', {'_id': mute.pk})
 
-                guild = self.bot.get_guild(1097610034701144144)
+                guild = self.bot.get_guild(1102654728350998542)
                 usr = guild.get_member(mute.id)
                 if usr:
                     mem = f'{utils.format_name(usr)} (`{usr.id}`)'
@@ -796,7 +796,7 @@ class Moderation(commands.Cog):
 
         if StaffRoles.owner in (r.id for r in member.roles):
             return await ctx.reply(f'{ctx.denial} `{utils.format_name(member)}` is already an owner!')
-        owner_role = ctx.astemia.get_role(StaffRoles.owner)
+        owner_role = ctx.vystalia.get_role(StaffRoles.owner)
         await member.edit(roles=[
             r for r in member.roles if r.id not in (StaffRoles.admin, StaffRoles.moderator)
         ] + [owner_role])
@@ -825,7 +825,7 @@ class Moderation(commands.Cog):
 
         if StaffRoles.admin in (r.id for r in member.roles):
             return await ctx.reply(f'{ctx.denial} `{utils.format_name(member)}` is already an admin!')
-        admin_role = ctx.astemia.get_role(StaffRoles.admin)
+        admin_role = ctx.vystalia.get_role(StaffRoles.admin)
         await member.edit(roles=[
             r for r in member.roles if r.id not in (StaffRoles.owner, StaffRoles.moderator)
         ] + [admin_role])
@@ -854,7 +854,7 @@ class Moderation(commands.Cog):
 
         if StaffRoles.moderator in (r.id for r in member.roles):
             return await ctx.reply(f'{ctx.denial} `{utils.format_name(member)}` is already a moderator!')
-        mod_role = ctx.astemia.get_role(StaffRoles.moderator)
+        mod_role = ctx.vystalia.get_role(StaffRoles.moderator)
         await member.edit(roles=[
             r for r in member.roles if r.id not in (StaffRoles.owner, StaffRoles.admin)
         ] + [mod_role])
@@ -920,7 +920,7 @@ class Moderation(commands.Cog):
         """Remove the owner role from everybody that has it."""
 
         owners = []
-        role = ctx.astemia.get_role(StaffRoles.owner)
+        role = ctx.vystalia.get_role(StaffRoles.owner)
         for member in role.members:
             await member.edit(roles=[r for r in member.roles if not r.id == StaffRoles.owner])
             owners.append(member)
@@ -975,7 +975,7 @@ class Moderation(commands.Cog):
         """Remove the admin role from everybody that has it."""
 
         admins = []
-        role = ctx.astemia.get_role(StaffRoles.admin)
+        role = ctx.vystalia.get_role(StaffRoles.admin)
         for member in role.members:
             await member.edit(roles=[r for r in member.roles if not r.id == StaffRoles.admin])
             admins.append(member)
@@ -1031,7 +1031,7 @@ class Moderation(commands.Cog):
         """Remove the moderator role from everybody that has it."""
 
         moderators = []
-        role = ctx.astemia.get_role(StaffRoles.moderator)
+        role = ctx.vystalia.get_role(StaffRoles.moderator)
         for member in role.members:
             await member.edit(roles=[r for r in member.roles if not r.id == StaffRoles.moderator])
             moderators.append(member)
@@ -1050,7 +1050,7 @@ class Moderation(commands.Cog):
         )
 
     async def end_giveaway(self, gw: GiveAway):
-        guild = self.bot.get_guild(1097610034701144144)
+        guild = self.bot.get_guild(1102654728350998542)
         participants = gw.participants + [0]
         random.shuffle(participants)
         while True:
@@ -1142,7 +1142,7 @@ class Moderation(commands.Cog):
 
         entries = []
         for mem_id in data.participants:
-            mem = ctx.astemia.get_member(mem_id)
+            mem = ctx.vystalia.get_member(mem_id)
             if mem is None:
                 mem = f'**[LEFT]** (`{mem_id}`)'
             entries.append(mem)
@@ -1187,7 +1187,7 @@ class Moderation(commands.Cog):
         entries = []
         for word in sorted_:
             added_by_id = data.bad_words[word]
-            added_by = ctx.astemia.get_member(added_by_id)
+            added_by = ctx.vystalia.get_member(added_by_id)
             added_by = f'**{added_by.display_name}#{added_by.tag}**' or '**[LEFT]**'
             added_by = added_by + f' (`{added_by_id}`)'
 
@@ -1481,7 +1481,7 @@ class Moderation(commands.Cog):
             return await ctx.reply(f'{ctx.denial} There are no added ogs.')
 
         ogs = []
-        guild = self.bot.get_guild(1097610034701144144)
+        guild = self.bot.get_guild(1102654728350998542)
         if guild is not None:
             for user_id in entry.ogs:
                 member = guild.get_member(user_id)
@@ -1688,7 +1688,7 @@ class Moderation(commands.Cog):
                 elif StaffRoles.moderator in (r.id for r in member.roles):  # Checks for mod
                     data.is_mod = True
 
-                role = ctx.astemia.get_role(ExtraRoles.muted)
+                role = ctx.vystalia.get_role(ExtraRoles.muted)
                 new_roles = [role for role in member.roles
                              if role.id not in (StaffRoles.all)
                              ] + [role]
@@ -1710,7 +1710,7 @@ class Moderation(commands.Cog):
                                  f'**Reason:** {reason}\n' \
                                  f'**Mute Duration:** `{mute_duration}`\n' \
                                  f'**Expire Date:** {expires_at}'
-                em.set_footer(text='Muted in `Astemia`')
+                em.set_footer(text='Muted in `Vystalia`')
                 em.timestamp = datetime.now(timezone.utc)
                 await utils.try_dm(member, embed=em)
 
@@ -1787,7 +1787,7 @@ class Moderation(commands.Cog):
             total_warns += warns
 
         for k in sorted(entry.warned_by, reverse=True, key=lambda k: entry.warned_by[k]):
-            mem = ctx.astemia.get_member(int(k))
+            mem = ctx.vystalia.get_member(int(k))
             warn_count = entry.warned_by[k]
             _warns_by.append(
                 f'\u2800\u2800• {utils.format_name(mem)} - {warn_count} warns'
@@ -1860,5 +1860,5 @@ class Moderation(commands.Cog):
         await ctx.send(message)
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(Moderation(bot))

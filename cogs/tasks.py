@@ -9,11 +9,11 @@ from disnake.ext import commands, tasks
 import utils
 from utils import Poll
 
-from main import Astemia
+from main import Vystalia
 
 
 class Tasks(commands.Cog):
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
 
         self.servers = [
@@ -28,7 +28,7 @@ class Tasks(commands.Cog):
 
     @tasks.loop(hours=3)
     async def send_random_question(self):
-        guild = self.bot.get_guild(1097610034701144144)
+        guild = self.bot.get_guild(1102654728350998542)
         channel = guild.get_channel(1078234686528172119)
         entry: utils.Constants = await utils.Constants.get()
         questions = entry.random_questions
@@ -67,7 +67,7 @@ class Tasks(commands.Cog):
         monthly_reset = datetime.fromtimestamp(data.monthly_messages['reset_when'])
         yearly_reset = datetime.fromtimestamp(data.yearly_messages['reset_when'])
 
-        guild = self.bot.get_guild(1097610034701144144)
+        guild = self.bot.get_guild(1102654728350998542)
 
         now = datetime.now()
 
@@ -274,5 +274,5 @@ class Tasks(commands.Cog):
         await self.bot.wait_until_ready()
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(Tasks(bot))

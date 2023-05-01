@@ -268,7 +268,7 @@ class Database:
     async def get(
             self,
             collection_name: str,
-            id: int = 745298049567424623
+            id: int = 1102653969483976725
     ):
         """|coro|
 

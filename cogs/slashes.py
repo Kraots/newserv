@@ -14,7 +14,7 @@ from disnake import (
 import utils
 from utils import Poll
 
-from main import Astemia
+from main import Vystalia
 
 
 class RecommendModal(Modal):
@@ -97,7 +97,7 @@ class RecommendModal(Modal):
 
 
 class PollDropdown(disnake.ui.Select):
-    def __init__(self, bot: Astemia, options, title, min_choices, max_choices, votes, voted):
+    def __init__(self, bot: Vystalia, options, title, min_choices, max_choices, votes, voted):
         self.poll_options = []
         self.title = title
         self.str_options = options
@@ -202,7 +202,7 @@ class PollView(disnake.ui.View):
 
 
 class SlashCommands(commands.Cog):
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
         self.loaded_polls = False
 
@@ -351,5 +351,5 @@ class SlashCommands(commands.Cog):
             self.bot.add_view(view, message_id=poll.message_id)
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(SlashCommands(bot))

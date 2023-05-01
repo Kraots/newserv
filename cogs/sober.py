@@ -10,13 +10,13 @@ from utils import (
     Sober
 )
 
-from main import Astemia
+from main import Vystalia
 
 
 class SoberApp(commands.Cog, name='Sober App'):
     """Commands for the sober app to keep track of your time being sober of a certain something."""
 
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
 
     @property
@@ -208,11 +208,11 @@ class SoberApp(commands.Cog, name='Sober App'):
 
     @commands.Cog.listener()
     async def on_member_remove(self, member: disnake.Member):
-        if member.guild.id != 1097610034701144144:
+        if member.guild.id != 1102654728350998542:
             return
 
         await self.bot.db.delete('sobers', {'user_id': member.id})
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(SoberApp(bot))

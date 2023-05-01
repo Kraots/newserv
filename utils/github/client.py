@@ -12,7 +12,7 @@ from disnake.ext import commands
 import utils
 
 if TYPE_CHECKING:
-    from main import Astemia
+    from main import Vystalia
 
 __all__ = ('GistContent', 'GithubClient',)
 
@@ -38,14 +38,14 @@ class GistContent:
 
 
 class GithubClient:
-    def __init__(self, bot: Astemia) -> None:
+    def __init__(self, bot: Vystalia) -> None:
         self.bot = bot
         self.lock = asyncio.Lock()
 
     async def github_request(self, method, url, *, params=None, data=None, headers=None) -> dict | str:
         hdrs = {
             'Accept': 'application/vnd.github.inertia-preview+json',
-            'User-Agent': 'Astemia',
+            'User-Agent': 'Vystalia',
             'Authorization': f'token {os.getenv("GITHUB_TOKEN")}'
         }
 

@@ -7,12 +7,12 @@ from disnake.ext import commands
 import utils
 from utils import Level, Context, Stats
 
-from main import Astemia
+from main import Vystalia
 
 
 class Levels(commands.Cog):
     """Level and message related commands."""
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
 
     @property
@@ -50,8 +50,8 @@ class Levels(commands.Cog):
 
             if message.author.id != self.bot._owner_id:
                 if lvl >= 10:
-                    guild = self.bot.get_guild(1097610034701144144)
-                    role = guild.get_role(1097616298692845628)
+                    guild = self.bot.get_guild(1102654728350998542)
+                    role = guild.get_role(1102654728350998543)
 
                     if role.id not in [r.id for r in message.author.roles]:
                         roles = list(message.author.roles) + [role]
@@ -59,7 +59,7 @@ class Levels(commands.Cog):
 
                         await utils.try_dm(
                             message.author,
-                            content='Congratulations of reaching level **10** in `Astemia`, '
+                            content='Congratulations of reaching level **10** in `Vystalia`, '
                                     'you have now unlocked the role **Pic Perms** which '
                                     'allows you to send gifs and images/videos in every channel '
                                     'you have access to chat in.'
@@ -73,7 +73,7 @@ class Levels(commands.Cog):
 
         `member` **->** The member you want to see the level of. If you want to see your own, you can ignore this since it defaults to yourself.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
@@ -112,7 +112,7 @@ class Levels(commands.Cog):
         current_xp = x
         needed_xp = int(200 * ((1 / 2) * lvl))
         percent = round(float(current_xp * 100 / needed_xp), 2)
-        members_count = len([m for m in ctx.astemia.members if not m.bot])
+        members_count = len([m for m in ctx.vystalia.members if not m.bot])
 
         rank_card = await (await utils.run_in_executor(utils.create_rank_card)(
             member, lvl, rank, members_count, current_xp, needed_xp, percent
@@ -147,7 +147,7 @@ class Levels(commands.Cog):
     async def level_top(self, ctx: Context):
         """See the top people with the highest levels.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
@@ -166,7 +166,7 @@ class Levels(commands.Cog):
                 if entry.xp < ((50 * (lvl**2)) + (50 * (lvl - 1))):
                     break
                 lvl += 1
-            user = ctx.astemia.get_member(entry.id)
+            user = ctx.vystalia.get_member(entry.id)
             if index in (1, 2, 3):
                 place = top_3_emojis[index]
             else:
@@ -226,7 +226,7 @@ class Levels(commands.Cog):
 
             if entry.messages_count != 0:
                 index += 1
-                mem = ctx.astemia.get_member(entry.id)
+                mem = ctx.vystalia.get_member(entry.id)
                 if index in (1, 2, 3):
                     place = top_3_emojis[index]
                 else:
@@ -537,12 +537,12 @@ class Levels(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_remove(self, member: disnake.Member):
-        if member.guild.id != 1097610034701144144:
+        if member.guild.id != 1102654728350998542:
             return
 
         await self.bot.db.delete('levels', {'_id': member.id})
         await self.bot.db.delete('stats', {'_id': member.id})
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(Levels(bot))

@@ -14,12 +14,12 @@ from utils import (
     Channels
 )
 
-from main import Astemia
+from main import Vystalia
 
 
 class Intros(commands.Cog):
     """Intro related commands."""
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
 
     @property
@@ -31,7 +31,7 @@ class Intros(commands.Cog):
     async def intro(self, ctx: Context):
         """Create/Redo your intro.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if ctx.author.id in self.bot.verifying:
@@ -46,7 +46,7 @@ class Intros(commands.Cog):
     async def intro_edit(self, ctx: Context):
         """Edit a single field in your intro.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
@@ -90,7 +90,7 @@ class Intros(commands.Cog):
                     'Please contact a staff member to unverify them! This is a bug.'
                 )
         view = None
-        intro_channel = ctx.astemia.get_channel(Channels.intros)
+        intro_channel = ctx.vystalia.get_channel(Channels.intros)
         try:
             msg = await intro_channel.fetch_message(data.message_id)
             if msg:
@@ -128,33 +128,33 @@ class Intros(commands.Cog):
         ) is False:
             return
 
-        unverified_role = ctx.astemia.get_role(ExtraRoles.unverified)
+        unverified_role = ctx.vystalia.get_role(ExtraRoles.unverified)
         data = await self.bot.db.get('intro', member.id)
         if data is not None:
-            intro_channel = ctx.astemia.get_channel(Channels.intros)
+            intro_channel = ctx.vystalia.get_channel(Channels.intros)
             await try_delete(channel=intro_channel, message_id=data.message_id)
             await self.bot.db.delete('intro', {'_id': member.id})
         await member.edit(roles=[r for r in member.roles if r.id in (
             ExtraRoles.muted, ExtraRoles.blocked, ExtraRoles.server_booster)] + [unverified_role])
         await try_dm(
             member,
-            'You have been unverified in `Astemia` by one of our staff members. '
+            'You have been unverified in `Vystalia` by one of our staff members. '
             'Please be serious when you\'re making your intro!'
         )
         await ctx.reply(f'> 👌 `{format_name(member)}` has been successfully unverified.')
 
     @commands.Cog.listener()
     async def on_member_remove(self, member: disnake.Member):
-        if member.guild.id != 1097610034701144144:
+        if member.guild.id != 1102654728350998542:
             return
 
         data = await self.bot.db.get('intro', member.id)
         if data:
-            guild = self.bot.get_guild(1097610034701144144)
+            guild = self.bot.get_guild(1102654728350998542)
             intro_channel = guild.get_channel(Channels.intros)
             await try_delete(channel=intro_channel, message_id=data.message_id)
             await self.bot.db.delete('intro', {'_id': member.id})
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(Intros(bot))

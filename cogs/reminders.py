@@ -14,13 +14,13 @@ from utils import (
     Reminder
 )
 
-from main import Astemia
+from main import Vystalia
 
 
 class Reminders(commands.Cog):
     """Reminder related commands."""
 
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
         self.check_current_reminders.start()
 
@@ -162,7 +162,7 @@ class Reminders(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_remove(self, member: disnake.Member):
-        if member.guild.id != 1097610034701144144:
+        if member.guild.id != 1102654728350998542:
             return
 
         await self.bot.db.delete('reminders', {'user_id': member.id})
@@ -182,5 +182,5 @@ class Reminders(commands.Cog):
             await ctx.reraise(error)
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(Reminders(bot))

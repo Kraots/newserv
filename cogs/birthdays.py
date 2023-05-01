@@ -9,13 +9,13 @@ from disnake.ext import commands, tasks
 import utils
 from utils import Context, Birthday, Channels, StaffRoles
 
-from main import Astemia
+from main import Vystalia
 
 
 class Birthdays(commands.Cog):
     """Birthday related commands."""
 
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
         self.check_birthday.start()
 
@@ -32,7 +32,7 @@ class Birthdays(commands.Cog):
                 data.next_birthday += relativedelta(years=1)
                 await data.commit()
 
-                guild = self.bot.get_guild(1097610034701144144)
+                guild = self.bot.get_guild(1102654728350998542)
                 channel = guild.get_channel(Channels.birthdays)
                 mem = guild.get_member(data.id)
                 _now = datetime.now() + relativedelta(days=3)  # Use this as source so it doesn't fail to say the right age for the people in UTC- timezones.
@@ -55,7 +55,7 @@ class Birthdays(commands.Cog):
                                 await utils.try_dm(
                                     mem,
                                     'Hello! Happy birthday for turning 20 years of age, but sadly, that also means you no longer meet '
-                                    'the age requirements of `Astemia`, therefore, you have been banned (people can\'t age backwards yk).\n'
+                                    'the age requirements of `Vystalia`, therefore, you have been banned (people can\'t age backwards yk).\n'
                                     'Apologies for the inconvenience, and once again, happy birthday. :tada: :tada:'
                                 )
                                 await self.bot.db.delete('bday', {'_id': mem.id})
@@ -117,7 +117,7 @@ class Birthdays(commands.Cog):
         **Example:**
         `!birthday set 24/08/2005`
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
@@ -181,7 +181,7 @@ class Birthdays(commands.Cog):
     async def birthday_remove(self, ctx: Context):
         """Remove your birthday, if you have it set.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
@@ -204,7 +204,7 @@ class Birthdays(commands.Cog):
     async def bday_top(self, ctx: Context):
         """See top 5 upcoming birthdays.
 
-        **NOTE:** This command can only be used in <#1097610036026548293>
+        **NOTE:** This command can only be used in <#1102654729387004047>
         """
 
         if await ctx.check_channel() is False:
@@ -215,7 +215,7 @@ class Birthdays(commands.Cog):
 
         datas: list[Birthday] = await self.bot.db.find_sorted('bday', 'next_birthday', 1)
         for data in datas[:5]:
-            user = ctx.astemia.get_member(data.id)
+            user = ctx.vystalia.get_member(data.id)
             index += 1
             next_birthday_date = data.birthday_date.strftime('%d %B %Y').replace(
                 str(data.birthday_date.year), str(data.next_birthday.year)
@@ -231,11 +231,11 @@ class Birthdays(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_remove(self, member: disnake.Member):
-        if member.guild.id != 1097610034701144144:
+        if member.guild.id != 1102654728350998542:
             return
 
         await self.bot.db.delete('bday', {'_id': member.id})
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(Birthdays(bot))

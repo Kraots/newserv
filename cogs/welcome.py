@@ -8,11 +8,11 @@ from disnake.ext import commands, tasks
 
 import utils
 
-from main import Astemia
+from main import Vystalia
 
 
 class Welcome(commands.Cog):
-    def __init__(self, bot: Astemia):
+    def __init__(self, bot: Vystalia):
         self.bot = bot
         self.files = {}
         self.send_welc.start()
@@ -64,7 +64,7 @@ class Welcome(commands.Cog):
                 ]
             )
 
-        if member.guild.id != 1097610034701144144:  # Only continue if it's actual astemia server.
+        if member.guild.id != 1102654728350998542:  # Only continue if it's actual vystalia server.
             return
 
         extra_guild = self.bot.get_guild(1098669760406896813)
@@ -80,7 +80,7 @@ class Welcome(commands.Cog):
         elif member in extra_guild_4.members:
             await extra_guild_4.ban(member, reason='Joined Main Server')
 
-        guild = self.bot.get_guild(1097610034701144144)
+        guild = self.bot.get_guild(1102654728350998542)
         if member.bot:
             bot_role = guild.get_role(utils.ExtraRoles.bot)
             await member.add_roles(bot_role, reason='Bot Account.')
@@ -119,7 +119,7 @@ class Welcome(commands.Cog):
                              f'**Reason:** {action.title} Evasion.\n' \
                              f'**Expire Date:** {expire_date}\n' \
                              f'**Remaining:** `{remaining}`'
-            em.set_footer(text=f'{fmt.title()} in `Astemia`')
+            em.set_footer(text=f'{fmt.title()} in `Vystalia`')
             em.timestamp = datetime.now(timezone.utc)
             await utils.try_dm(member, embed=em)
 
@@ -142,12 +142,12 @@ class Welcome(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_remove(self, member: disnake.Member):
-        if member.guild.id != 1097610034701144144:
+        if member.guild.id != 1102654728350998542:
             return
 
         if member.id in self.files:
             del self.files[member.id]
 
 
-def setup(bot: Astemia):
+def setup(bot: Vystalia):
     bot.add_cog(Welcome(bot))

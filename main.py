@@ -22,7 +22,7 @@ TOKEN = os.getenv('BOT_TOKEN')
 TO_REPLACE = os.getenv('NAMETOREPLACE')
 
 
-class Astemia(commands.Bot):
+class Vystalia(commands.Bot):
     def __init__(self):
         super().__init__(
             max_messages=100000,
@@ -34,7 +34,7 @@ class Astemia(commands.Bot):
             allowed_mentions=disnake.AllowedMentions(
                 roles=False, everyone=False, users=True
             ),
-            test_guilds=[1097610034701144144]
+            test_guilds=[1102654728350998542]
         )
 
         r = Repo('.')
@@ -46,7 +46,7 @@ class Astemia(commands.Bot):
 
         self.socket_events = Counter()
 
-        self._owner_id = 745298049567424623
+        self._owner_id = 1102653969483976725
 
         self.added_views = False
 
@@ -164,7 +164,7 @@ class Astemia(commands.Bot):
 
         # We do this cleanup in case the on_member_remove didn't trigger or
         # if the bot was offline during the time where the member left.
-        guild = self.get_guild(1097610034701144144)
+        guild = self.get_guild(1102654728350998542)
         await self.collection_cleanup(guild, utils.Intro)
         await self.collection_cleanup(guild, utils.Level)
         await self.collection_cleanup(guild, utils.AFK)
@@ -179,7 +179,7 @@ class Astemia(commands.Bot):
         self,
         channel: disnake.TextChannel,
         *,
-        name: str = "astemia",
+        name: str = "vystalia",
         avatar: disnake.Asset = None,
     ) -> disnake.Webhook:
         """Returns the general bot hook or creates one."""
@@ -219,7 +219,7 @@ class Astemia(commands.Bot):
             return True
         if isinstance(ctx.channel, disnake.DMChannel):
             if ctx.command.qualified_name not in ('intro', 'ticket'):
-                await ctx.send('Commands do not work in dm channels. Please use commands only in <#1097610036026548293>')
+                await ctx.send('Commands do not work in dm channels. Please use commands only in <#1102654729387004047>')
                 return False
         return True
 
@@ -254,7 +254,7 @@ class Astemia(commands.Bot):
 
     @staticmethod
     async def collection_cleanup(guild: disnake.Guild, collection) -> None:
-        """Searches and deletes every single document that is related to a user that isn't in astemia anymore.
+        """Searches and deletes every single document that is related to a user that isn't in vystalia anymore.
 
         Parameters
         ----------
@@ -288,4 +288,4 @@ class Astemia(commands.Bot):
                 self.bad_words[word] = added_by
 
 
-Astemia().run(TOKEN)
+Vystalia().run(TOKEN)

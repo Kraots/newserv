@@ -10,13 +10,13 @@ from disnake.ui import View, button
 import utils
 
 if TYPE_CHECKING:
-    from main import Astemia
+    from main import Vystalia
 
 __all__ = ('AnnouncementView',)
 
 
 class AnnouncementView(View):
-    def __init__(self, bot: Astemia, author: disnake.Member):
+    def __init__(self, bot: Vystalia, author: disnake.Member):
         super().__init__()
         self.bot = bot
         self.author = author
@@ -142,7 +142,7 @@ class AnnouncementView(View):
             return await inter.response.edit_message(content='You didn\'t set the content!')
         await inter.response.edit_message(view=None)
 
-        guild = self.bot.get_guild(1097610034701144144)
+        guild = self.bot.get_guild(1102654728350998542)
         news_channel = guild.get_channel(utils.Channels.news)
         title = self.title or None
         em = disnake.Embed(colour=utils.red, title=title, description=self.description)
