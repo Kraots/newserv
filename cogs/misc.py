@@ -181,7 +181,7 @@ class Misc(commands.Cog):
         if await ctx.check_channel() is False:
             return
 
-        await ctx.better_reply('https://discord.gg/ewZ7hQbJhj')
+        await ctx.better_reply('https://discord.gg/khPXDbDMT9')
 
     @commands.command(aliases=('ad',))
     async def serverad(self, ctx: Context):
