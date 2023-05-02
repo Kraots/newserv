@@ -90,7 +90,7 @@ class Context(commands.Context):
         elif member.id == 1102653969483976725:
             await self.reply(
                 f'{self.denial} That member is above or equal to you. '
-                'Cannot do that. (above in this case you sub bottom <:kek:1097656660241166356>)'
+                'Cannot do that. (above in this case you sub bottom <:kek:1102711414927405157>)'
             )
             return False
         elif self.author.top_role <= member.top_role:

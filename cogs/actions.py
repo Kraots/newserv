@@ -14,7 +14,7 @@ class Actions(commands.Cog):
 
     @property
     def display_emoji(self) -> str:
-        return '<:hug:1097656668462006434>'
+        return '<:hug:1102711422833668097>'
 
     @commands.command(name='huggles')
     async def _huggles(self, ctx: Context, members: commands.Greedy[disnake.Member] = None):
@@ -48,7 +48,7 @@ class Actions(commands.Cog):
 
     @commands.command(name='slap')
     async def _slap(self, ctx: Context, members: commands.Greedy[disnake.Member] = None):
-        """Give somebody a slap <:slap:1097656683376947260>
+        """Give somebody a slap <:slap:1102711437626974268>
 
         `members` **->** The people you want to slap. Can be more than just one, or none.
         """

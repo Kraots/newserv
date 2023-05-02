@@ -261,7 +261,7 @@ class OnMessage(commands.Cog):
 
                 m = await message.channel.send(message.author.mention, embed=em)
                 await m.add_reaction('<a:nitro_boost:939677120454610964>')
-                await m.add_reaction('<:blob_love:1098302008596902028>')
+                await m.add_reaction('<:blob_love:1102724531216449536>')
 
     @commands.Cog.listener('on_message')
     async def check_for_voice_message(self, message: disnake.Message):

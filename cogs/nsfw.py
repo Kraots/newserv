@@ -11,7 +11,7 @@ from main import Vystalia
 
 class Nsfw(commands.Cog):
     """Nsfw commands."""
-    LIP_BITE = '<:lipbite:1097656674912829460>'
+    LIP_BITE = '<:lipbite:1102711429359992842>'
 
     def __init__(self, bot: Vystalia):
         self.bot = bot

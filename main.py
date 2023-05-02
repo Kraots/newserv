@@ -118,21 +118,20 @@ class Vystalia(commands.Bot):
                 cmd.enabled = False
 
         if self.added_views is False:
-            self.add_view(utils.Verify(self), message_id=1098288764717105233)
-            self.add_view(utils.OpenTicketView(self), message_id=1098288283789836329)
+            self.add_view(utils.Verify(self), message_id=1103003469062865028)
+            self.add_view(utils.OpenTicketView(self), message_id=1103003700722667620)
 
-            self.add_view(utils.ColourButtonRoles(), message_id=1098285749226455160)
-            self.add_view(utils.ColourButtonRoles(), message_id=1098285811725766666)
-            self.add_view(utils.ColourButtonRoles(), message_id=1098285898845663295)
-            self.add_view(utils.ColourButtonRoles(), message_id=1098285974833864795)
-            self.add_view(utils.ColourButtonRoles(), message_id=1098286034523013241)
-            self.add_view(utils.ColourButtonRoles(), message_id=1098286158863138826)
+            self.add_view(utils.ColourButtonRoles(), message_id=1103000578491162744)
+            self.add_view(utils.ColourButtonRoles(), message_id=1103000751598481468)
+            self.add_view(utils.ColourButtonRoles(), message_id=1103000902857654322)
+            self.add_view(utils.ColourButtonRoles(), message_id=1103000992183750756)
+            self.add_view(utils.ColourButtonRoles(), message_id=1103001062178291833)
 
-            self.add_view(utils.GenderButtonRoles(), message_id=1098286422517104751)
-            self.add_view(utils.PronounsButtonRoles(), message_id=1098286488988422267)
-            self.add_view(utils.SexualityButtonRoles(), message_id=1098286549071826976)
-            self.add_view(utils.AgeButtonRoles(), message_id=1098286601139920906)
-            self.add_view(utils.DMButtonRoles(), message_id=1098286699131437066)
+            self.add_view(utils.GenderButtonRoles(), message_id=1103002201145753730)
+            self.add_view(utils.PronounsButtonRoles(), message_id=1103002250676293752)
+            self.add_view(utils.SexualityButtonRoles(), message_id=1103002291654639617)
+            self.add_view(utils.AgeButtonRoles(), message_id=1103002404783403112)
+            self.add_view(utils.DMButtonRoles(), message_id=1103002444901920820)
 
             async for ticket in utils.Ticket.find():
                 self.add_view(utils.TicketView(), message_id=ticket.message_id)
