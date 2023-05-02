@@ -90,7 +90,7 @@ class Tasks(commands.Cog):
                 'stats_chart/server-yearly.png',
                 'server-yearly.png'
             )
-            channel = guild.get_channel(1097610036026548286)
+            channel = guild.get_channel(1102654729194045454)
 
         if now >= daily_reset:
             new_reset = now + relativedelta(
