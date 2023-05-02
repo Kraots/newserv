@@ -197,12 +197,12 @@ class Featured(commands.Cog):
                 return
             elif matches:
                 guild = self.bot.get_guild(1102654728350998542)
-                ukiyo_invites = [inv.code for inv in await guild.invites()]
+                vystalia_invites = [inv.code for inv in await guild.invites()]
                 try:
-                    ukiyo_invites.append((await guild.vanity_invite()).code)
+                    vystalia_invites.append((await guild.vanity_invite()).code)
                 except disnake.HTTPException:
                     pass
-                if any(inv for inv in matches if inv not in ukiyo_invites):
+                if any(inv for inv in matches if inv not in vystalia_invites):
                     return
             elif message.content.count('\n') > 15:
                 return

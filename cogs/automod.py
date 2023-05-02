@@ -217,12 +217,12 @@ class AutoMod(commands.Cog):
         matches = utils.INVITE_REGEX.findall(content)
         if matches:
             guild = self.bot.get_guild(1102654728350998542)
-            ukiyo_invites = [inv.code for inv in await guild.invites()]
+            vystalia_invites = [inv.code for inv in await guild.invites()]
             try:
-                ukiyo_invites.append((await guild.vanity_invite()).code)
+                vystalia_invites.append((await guild.vanity_invite()).code)
             except disnake.HTTPException:
                 pass
-            if any(inv for inv in matches if inv not in ukiyo_invites):
+            if any(inv for inv in matches if inv not in vystalia_invites):
                 await utils.try_delete(message)
                 await utils.try_dm(
                     message.author,
