@@ -24,7 +24,7 @@ class Tasks(commands.Cog):
         #  self.send_random_question.start()
         self.check_polls.start()
         self.check_for_stats_reset.start()
-        self.notify_bump.start()
+        # self.notify_bump.start()
 
     @tasks.loop(hours=3)
     async def send_random_question(self):

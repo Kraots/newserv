@@ -67,18 +67,18 @@ class Welcome(commands.Cog):
         if member.guild.id != 1102654728350998542:  # Only continue if it's actual vystalia server.
             return
 
-        extra_guild = self.bot.get_guild(1098669760406896813)
-        extra_guild_2 = self.bot.get_guild(1098669783945314364)
-        extra_guild_3 = self.bot.get_guild(1098669730350497823)
-        extra_guild_4 = self.bot.get_guild(1098668833918697534)
-        if member in extra_guild.members:
-            await extra_guild.ban(member, reason='Joined Main Server')
-        elif member in extra_guild_2.members:
-            await extra_guild_2.ban(member, reason='Joined Main Server')
-        elif member in extra_guild_3.members:
-            await extra_guild_3.ban(member, reason='Joined Main Server')
-        elif member in extra_guild_4.members:
-            await extra_guild_4.ban(member, reason='Joined Main Server')
+        # extra_guild = self.bot.get_guild(1098669760406896813)
+        # extra_guild_2 = self.bot.get_guild(1098669783945314364)
+        # extra_guild_3 = self.bot.get_guild(1098669730350497823)
+        # extra_guild_4 = self.bot.get_guild(1098668833918697534)
+        # if member in extra_guild.members:
+        #     await extra_guild.ban(member, reason='Joined Main Server')
+        # elif member in extra_guild_2.members:
+        #     await extra_guild_2.ban(member, reason='Joined Main Server')
+        # elif member in extra_guild_3.members:
+        #     await extra_guild_3.ban(member, reason='Joined Main Server')
+        # elif member in extra_guild_4.members:
+        #     await extra_guild_4.ban(member, reason='Joined Main Server')
 
         guild = self.bot.get_guild(1102654728350998542)
         if member.bot:
