@@ -47,9 +47,10 @@ class Logs(commands.Cog):
 
             if before.id == self.bot._owner_id:  # Automatically change my tag in the verify embed whenever I change my tag.
                 channel = self.bot.get_channel(utils.Channels.verify)
-                m = await channel.fetch_message(1098288764717105233)
+                m = await channel.fetch_message(1103003469062865028)
                 em = m.embeds[0]
                 em.description = em.description.replace(before.discriminator, after.discriminator)
+                em.description = em.description.replace(before.name, after.name)
 
                 await m.edit(embed=em)
 
